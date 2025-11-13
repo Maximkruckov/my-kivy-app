@@ -1,5 +1,5 @@
 [app]
-title = My App
+title = MyApp
 package.name = myapp
 package.domain = org.test
 source.dir = .
@@ -15,8 +15,3 @@ api = 33
 minapi = 21
 android.accept_sdk_license = True
 android.arch = armeabi-v7a
-
-# ДОБАВЬ ЭТИ СТРОКИ:
-android.build_tools = 33.0.0
-android.sdk_version = 33
-android.ndk_version = 25b
