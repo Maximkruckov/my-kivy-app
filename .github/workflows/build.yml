@@ -1,9 +1,6 @@
 name: Build Android APK
 
-on: 
-  push:
-    branches: [ main, master ]
-  workflow_dispatch:
+on: [push, workflow_dispatch]
 
 jobs:
   build:
@@ -18,19 +15,15 @@ jobs:
       with:
         python-version: '3.9'
         
-    - name: Install system dependencies
-      run: |
-        sudo apt-get update
-        sudo apt-get install -y \
-          python3-pip \
-          openjdk-11-jdk \
-          git \
-          zip \
-          unzip
-        
-    - name: Install Python dependencies
+    - name: Install dependencies
       run: |
         pip install buildozer kivy cython
+        
+    - name: Accept Android licenses
+      run: |
+        mkdir -p ~/.android
+        echo "8933bad161af4178b1185d1a37fbf41ea5269c55" > ~/.android/licenses/android-sdk-license
+        echo "84831b9409646a918e30573bab4c9c91346d8abd" > ~/.android/licenses/android-sdk-preview-license
         
     - name: Build APK with Buildozer
       run: |
@@ -41,4 +34,3 @@ jobs:
       with:
         name: android-apk
         path: bin/*.apk
-        retention-days: 30
